@@ -9,6 +9,6 @@ void Map::map() {
 }
 
 
-void Map::export() {
+void Map::exportmap() {
 
 }
