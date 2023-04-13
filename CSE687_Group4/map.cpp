@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-Map::Map();
+//Map::Map();
 
 void Map::map() {
 
