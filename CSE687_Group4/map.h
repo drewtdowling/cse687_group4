@@ -30,13 +30,12 @@ ver 1.0 : 14 April 2023
 #include <string>
 #include <sstream>
 using std::string;
-using std::stringstream;
 
 class Map {
 public:
   Map(); // Constructor
 
-  stringstream map(string); // Accepts a single line of raw data from file and tokenize into distinct words
+  string map(string); // Accepts a single line of raw data from file and tokenize into distinct words
 
   bool const GetFlag(); // Returns object's flag
   void SetFlag(bool); // Sets object's flag

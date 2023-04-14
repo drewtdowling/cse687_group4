@@ -40,11 +40,11 @@ Map::Map()
 
 }
 
-stringstream Map::map(string text) 
+string Map::map(string text) 
 // string text : a full line of text to parse through
 {
   stringstream ss_in;
-  stringstream ss_out;
+  string output = "";
   string word = "";
 
   ss_in << text;
@@ -52,11 +52,11 @@ stringstream Map::map(string text)
     word = format(word);
     if (word != "") {
       word = tuplize(word);
-      ss_out << word;
+      output.append(word);
     }
   }
 
-  return ss_out;
+  return output;
 }
 
 
