@@ -127,9 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FileManagement.h" />
     <ClInclude Include="map.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="./FileManagement/FileManagement.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
   </ItemGroup>
