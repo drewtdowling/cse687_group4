@@ -48,9 +48,9 @@ std::string FileManagement::readFromIntermediateDirectoryToString(std::string fi
 	}
 }
 
-int FileManagement::writeToIntermediateDirectoryWithString(std::string nameOfFile, std::string stringToWrite)
+int FileManagement::writeToIntermediateDirectoryWithString(std::string stringToWrite)
 {
-	std::string fileToWrite = this->intermediateDirectory + nameOfFile;
+	std::string fileToWrite = this->intermediateDirectory + "intermediate.txt";
 	std::ofstream file(fileToWrite);
 	if (!file.is_open())
 	{
@@ -69,9 +69,9 @@ int FileManagement::writeToIntermediateDirectoryWithString(std::string nameOfFil
 	return 1;
 }
 
-int FileManagement::writeToOutputDirectoryWithString(std::string nameOfFile, std::string stringToWrite)
+int FileManagement::writeToOutputDirectoryWithString(std::string stringToWrite)
 {
-	std::string fileToWrite = this->outputDirectory + nameOfFile;
+	std::string fileToWrite = this->outputDirectory + "output.txt";
 	std::ofstream file(fileToWrite);
 	if (!file.is_open())
 	{

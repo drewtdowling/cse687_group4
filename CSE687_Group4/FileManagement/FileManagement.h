@@ -15,8 +15,8 @@ public:
 	// I/O operations
 	std::string readInputFileToString(std::string);
 	std::string readFromIntermediateDirectoryToString(std::string);
-	int writeToIntermediateDirectoryWithString(std::string, std::string);
-	int writeToOutputDirectoryWithString(std::string, std::string);
+	int writeToIntermediateDirectoryWithString(std::string);
+	int writeToOutputDirectoryWithString(std::string);
 
 	// Getters
 	std::string getInputDirectory(void);
