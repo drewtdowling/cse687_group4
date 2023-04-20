@@ -28,11 +28,17 @@ ver 1.0 : 19 April 2023
 class Reducer {
 
 public:
-  //constructor
+  //default constructor
+  Reducer();
+
+  //overloaded constructor
   Reducer(std::string str);
 
+  //takes in string and reduces to key value pair
+  std::string reduce(std::string str);
+
   //gets the reducer value as a string
-  std::string export() const;
+  std::string exporter(std::string, int);
 
 private:
   std::string word;
