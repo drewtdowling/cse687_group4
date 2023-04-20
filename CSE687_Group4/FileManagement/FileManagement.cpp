@@ -2,9 +2,9 @@
 
 FileManagement::FileManagement()
 {
-	this->inputDirectory = "../FileManagement/inputs/";
-	this->intermediateDirectory = "../FileManagement/intermediate/";
-	this->outputDirectory = "../FileManagement/outputs/";
+	this->_inputDirectory = "../FileManagement/inputs/";
+	this->_intermediateDirectory = "../FileManagement/intermediate/";
+	this->_outputDirectory = "../FileManagement/outputs/";
 }
 
 FileManagement::~FileManagement()
@@ -14,7 +14,7 @@ FileManagement::~FileManagement()
 
 std::string FileManagement::readInputFileToString(std::string fileName)
 {
-	std::string inputName = this->inputDirectory + fileName;
+	std::string inputName = this->_inputDirectory + fileName;
 	std::ifstream infile(inputName);
 
 	if (infile)
@@ -32,7 +32,7 @@ std::string FileManagement::readInputFileToString(std::string fileName)
 
 std::string FileManagement::readFromIntermediateDirectoryToString(std::string fileName)
 {
-	std::string inputName = this->intermediateDirectory + fileName;
+	std::string inputName = this->_intermediateDirectory + fileName;
 	std::ifstream infile(inputName);
 
 	if (infile)
@@ -50,7 +50,7 @@ std::string FileManagement::readFromIntermediateDirectoryToString(std::string fi
 
 int FileManagement::writeToIntermediateDirectoryWithString(std::string stringToWrite)
 {
-	std::string fileToWrite = this->intermediateDirectory + "intermediate.txt";
+	std::string fileToWrite = this->_intermediateDirectory + "intermediate.txt";
 	std::ofstream file(fileToWrite);
 	if (!file.is_open())
 	{
@@ -71,7 +71,7 @@ int FileManagement::writeToIntermediateDirectoryWithString(std::string stringToW
 
 int FileManagement::writeToOutputDirectoryWithString(std::string stringToWrite)
 {
-	std::string fileToWrite = this->outputDirectory + "output.txt";
+	std::string fileToWrite = this->_outputDirectory + "output.txt";
 	std::ofstream file(fileToWrite);
 	if (!file.is_open())
 	{
@@ -92,30 +92,30 @@ int FileManagement::writeToOutputDirectoryWithString(std::string stringToWrite)
 
 std::string FileManagement::getInputDirectory()
 {
-	return inputDirectory;
+	return _inputDirectory;
 }
 
 std::string FileManagement::getIntermediateDirectory()
 {
-	return intermediateDirectory;
+	return _intermediateDirectory;
 }
 
 std::string FileManagement::getOutputDirectory()
 {
-	return outputDirectory;
+	return _outputDirectory;
 }
 
 void FileManagement::setInputDirectory(std::string inputDirectory)
 {
-	inputDirectory = this->inputDirectory;
+	inputDirectory = this->_inputDirectory;
 }
 
 void FileManagement::setIntermediateDirectory(std::string intermediateDirectory)
 {
-	intermediateDirectory = this->intermediateDirectory;
+	intermediateDirectory = this->_intermediateDirectory;
 }
 
 void FileManagement::setOutputDirectory(std::string outputDirectory)
 {
-	outputDirectory = this->outputDirectory;
+	outputDirectory = this->_outputDirectory;
 }

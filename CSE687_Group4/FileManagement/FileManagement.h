@@ -29,9 +29,9 @@ public:
 	void setOutputDirectory(std::string);
 
 private:
-	std::string inputDirectory;
-	std::string intermediateDirectory;
-	std::string outputDirectory;
+	std::string _inputDirectory;
+	std::string _intermediateDirectory;
+	std::string _outputDirectory;
 };
 
 #endif
