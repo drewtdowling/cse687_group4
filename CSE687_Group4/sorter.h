@@ -16,11 +16,12 @@ This package provides a public LinkedList class and a private Node class.
 LinkedList reads strings in and sorts the the strings into a single linked
 list alphabetically.
 
-The LinkedList class returns the strings as one list in the console using
-displayList() or can return a single specific string using getNode(int index)
+The LinkedList class can add a string that is in the proper format to the
+linked list using insert().
 The number of elements in the linked list can be returned using getSize().
-The first string in the list can be returned and removed from the list using
-pop().
+A specific node of the linked list can be returned as a string using
+getNode().
+
 
 Maintenance History:
 --------------------
