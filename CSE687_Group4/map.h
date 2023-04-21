@@ -2,7 +2,7 @@
 #define MAP
 ////////////////////////////////////////////////////////////////////////
 // map.h - takes a sentence and breaks it into individual words       //
-// ver 4.2                                                            //
+// ver 1.0                                                            //
 // Language:    C++, Visual Studio 2022                               //
 // Platform:    Windows 11                                            //
 // Application: Mapping component, CSE687 - Object Oriented Design    //
