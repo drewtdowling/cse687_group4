@@ -129,11 +129,15 @@
   <ItemGroup>
     <ClInclude Include="FileManagement.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="sorter.h" />
+    <ClInclude Include="reduce.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="./FileManagement/FileManagement.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="sorter.cpp" />
+    <ClCompile Include="reduce.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

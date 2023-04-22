@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////
 // map.cpp - takes a sentence and breaks it into individual words     //
-// ver 1.1                                                            //
+// ver 1.2                                                            //
 // Language:    C++, Visual Studio 2022                               //
 // Platform:    Windows 11                                            //
 // Application: Mapping component, CSE687 - Object Oriented Design    //
@@ -26,6 +26,9 @@ ver 1.0 : 14 April 2023
 
 ver 1.1 : 21 April 2023
 -fixed minor bugs (flag to flag_)
+
+ver 1.2 : 21 April 2023
+-added more filters
 */
 
 #include "map.h"
@@ -33,22 +36,18 @@ ver 1.1 : 21 April 2023
 #include <string>
 #include <sstream>
 
-using std::string;
-using std::getline;
-using std::stringstream;
-
 Map::Map()
   : flag_(true)
 {
 
 }
 
-string Map::map(string text) 
+std::string Map::map(std::string text)
 // string text : a full line of text to parse through
 {
-  stringstream ss_in;
-  string output = "";
-  string word = "";
+  std::stringstream ss_in;
+  std::string output = "";
+  std::string word = "";
 
   ss_in << text;
   while (getline(ss_in, word, ' ')) {
@@ -75,7 +74,7 @@ void Map::SetFlag(bool new_flag) // Sets object's flag
 }
 
 
-string Map::format(string word) // Format and error check a single word taken from inputted string
+std::string Map::format(std::string word) // Format and error check a single word taken from inputted string
 {
   // Convert to lowercase
   word = lowercase(word);
@@ -83,17 +82,39 @@ string Map::format(string word) // Format and error check a single word taken fr
   // Filter out given strings
   word = filter(word, "\'s", false);  // 's
   word = filter(word, "\'", true);    // starting with '
+  word = filter(word, "\"", false);   // "
+  word = filter(word, "/", false);    // /
+  word = filter(word, "\\", false);   // 
   word = filter(word, ".", false);    // .
   word = filter(word, ",", false);    // ,
   word = filter(word, "!", false);    // !
+  word = filter(word, "?", false);    // ?
   word = filter(word, "-", false);    // -
   word = filter(word, "_", false);    // _
+  word = filter(word, "(", false);    // (
+  word = filter(word, ")", false);    // )
+  word = filter(word, "[", false);    // [
+  word = filter(word, "]", false);    // ]
+  word = filter(word, "{", false);    // {
+  word = filter(word, "}", false);    // }
+  word = filter(word, "@", false);    // @
+  word = filter(word, "#", false);    // #
+  word = filter(word, "$", false);    // $
+  word = filter(word, "%", false);    // %
+  word = filter(word, "&", false);    // &
+  word = filter(word, "*", false);    // *
+  word = filter(word, "^", false);    // ^
+  word = filter(word, "<", false);    // <
+  word = filter(word, ">", false);    // >
+  word = filter(word, "+", false);    // +
+  word = filter(word, "=", false);    // =
+  word = filter(word, ":", false);    // :
 
   return word;
 }
 
 
-string Map::lowercase(string word) // Convert a string to all lowercase alphanumeric
+std::string Map::lowercase(std::string word) // Convert a string to all lowercase alphanumeric
 // string word : Input string
 {
   for (unsigned int i = 0; i < word.length(); i++) {
@@ -104,7 +125,7 @@ string Map::lowercase(string word) // Convert a string to all lowercase alphanum
 }
 
 
-string Map::filter(string word, string filter, bool starts_with) // Removes filtered string from word input
+std::string Map::filter(std::string word, std::string filter, bool starts_with) // Removes filtered string from word input
 // string word : Input string (e.g. 'tis)
 // string filter : Phrase to be removed from input string (e.g. ' )
 // bool startsWith : Only checks if it starts with the filter and removes it (e.g. 'tisn't -> tisn't),
@@ -129,10 +150,10 @@ string Map::filter(string word, string filter, bool starts_with) // Removes filt
 }
 
 
-string Map::tuplize(string word) // Creates the (word, 1) tuple given a single word
+std::string Map::tuplize(std::string word) // Creates the (word, 1) tuple given a single word
 // string word : String to make into tuple
 {
-  string tuple;
+  std::string tuple;
   tuple = "(" + word + ", 1)\n";
   return tuple;
 }
