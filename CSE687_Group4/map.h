@@ -1,5 +1,5 @@
-#ifndef MAP
-#define MAP
+#ifndef MAP_H
+#define MAP_H
 ////////////////////////////////////////////////////////////////////////
 // map.h - takes a sentence and breaks it into individual words       //
 // ver 1.0                                                            //
@@ -29,13 +29,12 @@ ver 1.0 : 14 April 2023
 
 #include <string>
 #include <sstream>
-using std::string;
 
 class Map {
 public:
   Map(); // Constructor
 
-  string map(string); // Accepts a single line of raw data from file and tokenize into distinct words
+  std::string map(std::string); // Accepts a single line of raw data from file and tokenize into distinct words
 
   bool const GetFlag(); // Returns object's flag
   void SetFlag(bool); // Sets object's flag
@@ -43,11 +42,11 @@ public:
 private:
   bool flag_; // Flag for object when busy;
 
-  string format(string); // Format and error check a single word taken from inputted string
-  string lowercase(string); // Convert a string to all lowercase alphanumeric
-  string filter(string, string, bool); // Removes filtered string from word input
-  string tuplize(string); // Creates the ("word", 1) tuple given a single word
+  std::string format(std::string); // Format and error check a single word taken from inputted string
+  std::string lowercase(std::string); // Convert a string to all lowercase alphanumeric
+  std::string filter(std::string, std::string, bool); // Removes filtered string from word input
+  std::string tuplize(std::string); // Creates the ("word", 1) tuple given a single word
 };
 
 
-#endif  // MAP
+#endif  // MAP_H
