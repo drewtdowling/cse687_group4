@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////
 // map.cpp - takes a sentence and breaks it into individual words     //
-// ver 4.2                                                            //
+// ver 1.1                                                            //
 // Language:    C++, Visual Studio 2022                               //
 // Platform:    Windows 11                                            //
 // Application: Mapping component, CSE687 - Object Oriented Design    //
@@ -23,6 +23,9 @@ Maintenance History:
 --------------------
 ver 1.0 : 14 April 2023
 -initial release
+
+ver 1.1 : 21 April 2023
+-fixed minor bugs (flag to flag_)
 */
 
 #include "map.h"
@@ -35,7 +38,7 @@ using std::getline;
 using std::stringstream;
 
 Map::Map()
-  : flag(true)
+  : flag_(true)
 {
 
 }
@@ -93,7 +96,7 @@ string Map::format(string word) // Format and error check a single word taken fr
 string Map::lowercase(string word) // Convert a string to all lowercase alphanumeric
 // string word : Input string
 {
-  for (int i = 0; i < word.length(); i++) {
+  for (unsigned int i = 0; i < word.length(); i++) {
     word[i] = tolower(word[i]);
   }
 
