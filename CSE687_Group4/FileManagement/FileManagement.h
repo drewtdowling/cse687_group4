@@ -18,6 +18,7 @@ public:
 	int writeToOutputDirectoryWithString(std::string);
 	int truncateIntermediateFile(std::string);
 	int truncateOutputFile(std::string);
+	int outputSuccess();
 
 	// Getters
 	std::string getInputDirectory(void);

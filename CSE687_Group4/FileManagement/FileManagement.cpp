@@ -120,6 +120,26 @@ int FileManagement::writeToOutputDirectoryWithString(std::string stringToWrite)
 	return 1;
 }
 
+int FileManagement::outputSuccess()
+{
+	std::string fileToWrite = this->_outputDirectory + "success.txt";
+	std::ofstream file;
+	file.open(fileToWrite, std::ios::app);
+	if (!file.is_open()) {
+		std::cerr << "Failed to open file in writeToOutputDirectoryWithString" << std::endl;
+		return -1;
+	}
+
+	file << "SUCCESS";
+	if (!file) {
+		std::cerr << "Failed to write file in writeToOutputDirectoryWithString" << std::endl;
+		return -1;
+	}
+	file.close();
+
+	return 1;
+}
+
 int FileManagement::truncateIntermediateFile(std::string fileName)
 {
 	std::ofstream outfile;
