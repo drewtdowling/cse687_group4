@@ -48,7 +48,7 @@ int main()
 
   //std::stringstream temp; // delete later
 
-  map_stream << fileManagement.readInputFileToString("MeasureForMeasure.txt");
+  map_stream << fileManagement.readInputFileToString("TheTwoGentlemenOfVerona.txt");
   while (getline(map_stream, line, '\n')) {
     //temp << map.map(line); // delete later
     fileManagement.writeToIntermediateDirectoryWithString(intermediateBeforeSorting, map.map(line));
