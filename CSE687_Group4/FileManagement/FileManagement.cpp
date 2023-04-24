@@ -1,3 +1,39 @@
+////////////////////////////////////////////////////////////////////////
+// FileManagement.cpp - does all File I/O operations                  //
+// ver 1.2                                                            //
+// Language:    C++, Visual Studio 2022                               //
+// Platform:    Windows 11                                            //
+// Application: Mapping component, CSE687 - Object Oriented Design    //
+// Author:      Drew Dowling , Syracuse University                    //
+//              drdowlins@syr.edu                                    //
+////////////////////////////////////////////////////////////////////////
+/*
+Package Operations:
+-------------------
+
+This package allows read/write operations of multiple files including input,
+output, and intermediate directories
+
+Can also set the input, intermediate, and output directories
+
+Maintenance History:
+--------------------
+ver 1.0 : 14 April 2023
+-initial release
+
+ver 1.1 : 21 April 2023
+-fixed minor bugs (flag to flag_)
+
+ver 1.2 : 21 April 2023
+-added more
+
+ver 1.3 23 April 2023
+-fixed bug where it overwrites itself
+
+ver 1.4 23 April 2023
+-added this header
+*/
+
 #include "FileManagement.h"
 
 FileManagement::FileManagement()
