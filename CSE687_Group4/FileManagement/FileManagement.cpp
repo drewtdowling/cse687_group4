@@ -17,13 +17,11 @@ std::string FileManagement::readInputFileToString(std::string fileName)
 	std::string inputName = this->_inputDirectory + fileName;
 	std::ifstream infile(inputName);
 
-	if (infile)
-	{
+	if (infile) {
 		std::string content((std::istreambuf_iterator<char>(infile)), (std::istreambuf_iterator<char>()));
 		return content;
 	}
-	else
-	{
+	else {
 		// Error handling here
 		std::cerr << "Unable to open file from the input directory" << std::endl;
 		return ""; // Just return an empty string so no null exceptions
@@ -35,32 +33,29 @@ std::string FileManagement::readFromIntermediateDirectoryToString(std::string fi
 	std::string inputName = this->_intermediateDirectory + fileName;
 	std::ifstream infile(inputName);
 
-	if (infile)
-	{
+	if (infile) {
 		std::string content((std::istreambuf_iterator<char>(infile)), (std::istreambuf_iterator<char>()));
 		return content;
 	}
-	else
-	{
+	else {
 		// Error handling here
-		std::cerr << "Unable to Open File from input directory" << std::endl;
+		std::cerr << "Unable to Open File from intermediate directory" << std::endl;
 		return ""; // Just return an empty string so no null exceptions
 	}
 }
 
-int FileManagement::writeToIntermediateDirectoryWithString(std::string stringToWrite)
+int FileManagement::writeToIntermediateDirectoryWithString(std::string fileName, std::string stringToWrite)
 {
-	std::string fileToWrite = this->_intermediateDirectory + "intermediate.txt";
-	std::ofstream file(fileToWrite);
-	if (!file.is_open())
-	{
+	std::string fileToWrite = this->_intermediateDirectory + fileName;
+	std::ofstream file;
+	file.open(fileToWrite, std::ios::app);
+	if (!file.is_open()) {
 		std::cerr << "Failed to open file in writeToIntermediateDirectoryWithString" << std::endl;
 		return -1;
 	}
 
 	file << stringToWrite;
-	if (!file)
-	{
+	if (!file) {
 		std::cerr << "Failed to write file in writeToIntermediateDirectoryWithString" << std::endl;
 		return -1;
 	}
@@ -72,21 +67,46 @@ int FileManagement::writeToIntermediateDirectoryWithString(std::string stringToW
 int FileManagement::writeToOutputDirectoryWithString(std::string stringToWrite)
 {
 	std::string fileToWrite = this->_outputDirectory + "output.txt";
-	std::ofstream file(fileToWrite);
-	if (!file.is_open())
-	{
+	std::ofstream file;
+	file.open(fileToWrite, std::ios::app);
+	if (!file.is_open()) {
 		std::cerr << "Failed to open file in writeToOutputDirectoryWithString" << std::endl;
 		return -1;
 	}
 
 	file << stringToWrite;
-	if (!file)
-	{
+	if (!file) {
 		std::cerr << "Failed to write file in writeToOutputDirectoryWithString" << std::endl;
 		return -1;
 	}
 	file.close();
 
+	return 1;
+}
+
+int FileManagement::truncateIntermediateFile(std::string fileName)
+{
+	std::ofstream outfile;
+	outfile.open(_intermediateDirectory + fileName, std::ios::trunc); // open file in truncate mode
+	if (!outfile.is_open()) {
+		std::cerr << "Failed to open file!" << std::endl;
+		return -1;
+	}
+
+	outfile.close(); // close file
+	return 1;
+}
+
+int FileManagement::truncateOutputFile(std::string fileName)
+{
+	std::ofstream outfile;
+	outfile.open(_outputDirectory + fileName, std::ios::trunc); // open file in truncate mode
+	if (!outfile.is_open()) {
+		std::cerr << "Failed to open file!" << std::endl;
+		return -1;
+	}
+
+	outfile.close(); // close file
 	return 1;
 }
 

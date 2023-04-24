@@ -38,47 +38,55 @@ int main()
   Map map = Map();
   std::stringstream map_stream;
   std::string line = "";
+  std::string intermediateBeforeSorting = "intermediateBeforeSorting.txt";
+  std::string intermediateAfterSorting = "intermediateAfterSorting.txt";
 
-  std::stringstream temp; // delete later
+  // Clears the files
+  fileManagement.truncateIntermediateFile(intermediateBeforeSorting);
+  fileManagement.truncateIntermediateFile(intermediateAfterSorting);
+  fileManagement.truncateOutputFile("output.txt");
 
-  map_stream << fileManagement.readInputFileToString("AsYouLIkeIte.txt");
+  //std::stringstream temp; // delete later
+
+  map_stream << fileManagement.readInputFileToString("MeasureForMeasure.txt");
   while (getline(map_stream, line, '\n')) {
-    temp << map.map(line); // delete later
-    //fileManagement.writeToIntermediateDirectoryWithString(map.map(line));
+    //temp << map.map(line); // delete later
+    fileManagement.writeToIntermediateDirectoryWithString(intermediateBeforeSorting, map.map(line));
   }
 
   LinkedList linkedlist;
   std::string nodeline = "";
   std::stringstream sort_stream;
 
-  //sort_stream << fileManagement.__();
-  while (getline(temp, nodeline, '\n')) { // (getline(sort_stream, nodeline, '\n')){
+  sort_stream << fileManagement.readFromIntermediateDirectoryToString(intermediateBeforeSorting);
+  while /*(getline(temp, nodeline, '\n')) {*/ (getline(sort_stream, nodeline, '\n')){
     linkedlist.insert(nodeline);
   }
 
   std::stringstream temp2; // delete later
 
   for (int i = 0; i < linkedlist.getSize(); i++) {
-    temp2 << linkedlist.getNode(i) << "\n"; // delete later
-    //fileManagement.__(list.getNode(i));
+    //temp2 << linkedlist.getNode(i) << "\n"; // delete later
+    std::string currNode = linkedlist.getNode(i) + "\n";
+    fileManagement.writeToIntermediateDirectoryWithString(intermediateAfterSorting, currNode);
   }
 
   Reducer reducer = Reducer();
   std::string sortedline = "";
   std::stringstream reduce_stream;
 
-  //reduce_stream << fileManagement.__();
-  std::stringstream temp3; // delete later
-  while (getline(temp2, sortedline, '\n')) { // (getline(reduce_stream, sortedline, '\n')){
-    temp3 << reducer.reduce(sortedline) << "\n"; // delete later
-    //fileManagement.__(reducer.reduce(sortedline));
+  reduce_stream << fileManagement.readFromIntermediateDirectoryToString(intermediateAfterSorting);
+  //std::stringstream temp3; // delete later
+  while /*(getline(temp2, sortedline, '\n')) {*/  (getline(reduce_stream, sortedline, '\n')){
+    //temp3 << reducer.reduce(sortedline) << "\n"; // delete later
+    fileManagement.writeToOutputDirectoryWithString(reducer.reduce(sortedline));
   }
 
   // testing print to console, delete below
-  std::string tempstring = "";
+  /*std::string tempstring = "";
   while (getline(temp3, tempstring, '\n')) {
     std::cout << tempstring << "\n";
-  }
+  }*/
 
   // output success file
 
