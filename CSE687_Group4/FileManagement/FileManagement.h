@@ -4,7 +4,6 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <vector>
 
 class FileManagement
 {
@@ -15,8 +14,11 @@ public:
 	// I/O operations
 	std::string readInputFileToString(std::string);
 	std::string readFromIntermediateDirectoryToString(std::string);
-	int writeToIntermediateDirectoryWithString(std::string);
+	int writeToIntermediateDirectoryWithString(std::string, std::string);
 	int writeToOutputDirectoryWithString(std::string);
+	int truncateIntermediateFile(std::string);
+	int truncateOutputFile(std::string);
+	int outputSuccess();
 
 	// Getters
 	std::string getInputDirectory(void);
