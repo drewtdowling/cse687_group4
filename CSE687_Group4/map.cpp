@@ -109,6 +109,7 @@ std::string Map::format(std::string word) // Format and error check a single wor
   word = filter(word, "+", false);    // +
   word = filter(word, "=", false);    // =
   word = filter(word, ":", false);    // :
+  word = filter(word, ";", false);    // :
 
   return word;
 }
