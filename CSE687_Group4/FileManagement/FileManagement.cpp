@@ -32,6 +32,9 @@ ver 1.3 23 April 2023
 
 ver 1.4 23 April 2023
 -added this header
+
+ver 1.5 25 April 2023
+-Added function to execute PowerShell
 */
 
 #include "FileManagement.h"
@@ -46,6 +49,33 @@ FileManagement::FileManagement()
 FileManagement::~FileManagement()
 {
 
+}
+
+std::string FileManagement::executePowerShellCommand(std::string command)
+{
+	std::string result = "";
+	std::string fullCommand = "powershell.exe -ExecutionPolicy Bypass -Command \"" + command + "\"";
+	char buffer[128];
+	FILE* pipe = _popen(fullCommand.c_str(), "r");
+	if (!pipe)
+	{
+		std::cerr << "Failed to execute PowerShell command.";
+		return "";
+	}
+	try
+	{
+		while (fgets(buffer, sizeof(buffer), pipe) != NULL)
+		{
+			result += buffer;
+		}
+	}
+	catch (...)
+	{
+		std::cerr << "Failed to execute PowerShell command.";
+		return "";
+	}
+	_pclose(pipe);
+	return result;
 }
 
 std::string FileManagement::readInputFileToString(std::string fileName)
