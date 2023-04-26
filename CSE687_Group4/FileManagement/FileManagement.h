@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <windows.h>
 
 class FileManagement
 {
@@ -12,6 +13,7 @@ public:
 	~FileManagement();
 
 	// I/O operations
+	std::string executePowerShellCommand(std::string);
 	std::string readInputFileToString(std::string);
 	std::string readFromIntermediateDirectoryToString(std::string);
 	int writeToIntermediateDirectoryWithString(std::string, std::string);

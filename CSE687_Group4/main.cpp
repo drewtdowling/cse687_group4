@@ -33,6 +33,18 @@ ver 1.2 : 23 April 2023
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <vector>
+
+std::vector<std::string> splitStringByNewLine(const std::string& str)
+{
+  auto result = std::vector<std::string>{};
+  auto ss = std::stringstream{ str };
+
+  for (std::string line; std::getline(ss, line, '\n');)
+    result.push_back(line);
+
+  return result;
+}
 
 int main()
 {
@@ -55,7 +67,20 @@ int main()
   std::stringstream mapStream;
   std::string line = "";
 
-  mapStream << fileManagement.readInputFileToString("TheTwoGentlemenOfVerona.txt");
+  std::string filesInInput = fileManagement.executePowerShellCommand("dir ../FileManagement/inputs -Name");
+  std::vector<std::string> fileNames = splitStringByNewLine(filesInInput);
+  std::string concatFilesString = "";
+  for (unsigned int i = 0; i < fileNames.size(); i++)
+  {
+    if (i != fileNames.size() - 1) {
+      concatFilesString += ("../FileManagement/inputs/" + fileNames[i] + ", ");
+    }
+    else {
+      concatFilesString += ("../FileManagement/inputs/" + fileNames[i]);
+    }
+  }
+  fileManagement.executePowerShellCommand("Get-Content " + concatFilesString + " | " + "Set-Content ../FileManagement/inputs/input.txt");
+  mapStream << fileManagement.readInputFileToString("input.txt");
   while (getline(mapStream, line, '\n')) {
     fileManagement.writeToIntermediateDirectoryWithString(intermediateBeforeSorting, map.map(line));
   }
@@ -69,7 +94,7 @@ int main()
   std::stringstream sortStream;
 
   sortStream << fileManagement.readFromIntermediateDirectoryToString(intermediateBeforeSorting);
-  while (getline(sortStream, nodeline, '\n')){
+  while (getline(sortStream, nodeline, '\n')) {
     linkedlist.insert(nodeline);
   }
   for (int i = 0; i < linkedlist.getSize(); i++) {
@@ -86,12 +111,11 @@ int main()
   std::stringstream reduceStream;
 
   reduceStream << fileManagement.readFromIntermediateDirectoryToString(intermediateAfterSorting);
-  while (getline(reduceStream, sortedline, '\n')){
+  while (getline(reduceStream, sortedline, '\n')) {
     std::string reduceOutput = reducer.reduce(sortedline) + "\n";
     fileManagement.writeToOutputDirectoryWithString(reduceOutput);
   }
 #pragma endregion Reduce
-
 
   // output success file
   fileManagement.outputSuccess();
