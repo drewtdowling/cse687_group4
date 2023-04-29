@@ -34,6 +34,7 @@ ver 1.2 : 23 April 2023
 #include <string>
 #include <sstream>
 #include <vector>
+#include <filesystem>
 
 std::vector<std::string> splitStringByNewLine(const std::string& str)
 {
@@ -67,20 +68,7 @@ int main()
   std::stringstream mapStream;
   std::string line = "";
 
-  std::string filesInInput = fileManagement.executePowerShellCommand("dir ../FileManagement/inputs -Name");
-  std::vector<std::string> fileNames = splitStringByNewLine(filesInInput);
-  std::string concatFilesString = "";
-  for (unsigned int i = 0; i < fileNames.size(); i++)
-  {
-    if (i != fileNames.size() - 1) {
-      concatFilesString += ("../FileManagement/inputs/" + fileNames[i] + ", ");
-    }
-    else {
-      concatFilesString += ("../FileManagement/inputs/" + fileNames[i]);
-    }
-  }
-  fileManagement.executePowerShellCommand("Get-Content " + concatFilesString + " | " + "Set-Content ../FileManagement/inputs/input.txt");
-  mapStream << fileManagement.readInputFileToString("input.txt");
+  mapStream << fileManagement.readInputFileToString();
   while (getline(mapStream, line, '\n')) {
     fileManagement.writeToIntermediateDirectoryWithString(intermediateBeforeSorting, map.map(line));
   }

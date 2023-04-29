@@ -38,6 +38,8 @@ ver 1.5 25 April 2023
 */
 
 #include "FileManagement.h"
+#include <filesystem>
+#include <string>
 
 FileManagement::FileManagement()
 {
@@ -78,20 +80,30 @@ std::string FileManagement::executePowerShellCommand(std::string command)
 	return result;
 }
 
-std::string FileManagement::readInputFileToString(std::string fileName)
+std::string FileManagement::readInputFileToString()
 {
-	std::string inputName = this->_inputDirectory + fileName;
-	std::ifstream infile(inputName);
+	std::string path = this->_inputDirectory;
+	std::string output = "";
 
-	if (infile) {
-		std::string content((std::istreambuf_iterator<char>(infile)), (std::istreambuf_iterator<char>()));
-		return content;
+	for (const auto& entry : std::filesystem::directory_iterator(path)) {
+		std::ifstream infile(entry);
+		if (infile) {
+			std::string content((std::istreambuf_iterator<char>(infile)), (std::istreambuf_iterator<char>()));
+			output.append(content);
+			output.append("\n");
+		}
+		else {
+			// Error handling here
+			std::cerr << "Unable to open file from the input directory" << std::endl;
+		}
 	}
-	else {
+	if (output == "") {
 		// Error handling here
-		std::cerr << "Unable to open file from the input directory" << std::endl;
-		return ""; // Just return an empty string so no null exceptions
+		std::cerr << "No acceptable files in the input directory" << std::endl;
+		return "";
 	}
+
+	return output;
 }
 
 std::string FileManagement::readFromIntermediateDirectoryToString(std::string fileName)
