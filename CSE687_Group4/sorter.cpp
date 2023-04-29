@@ -24,6 +24,9 @@ Maintenance History:
 --------------------
 ver 1.0 : 14 April 2023
 -initial release
+
+ver 1.1: 27 April 2023
+-added the pop() method
 */
 #include <iostream>
 #include <sstream>
@@ -160,5 +163,41 @@ std::string LinkedList::getNode(int index) const
   //put word value and valuesOut into single string and return
   std::stringstream ss;
   ss << "(" << current->word << ", " << valuesOut << ")";
+  return ss.str();
+}
+
+std::string LinkedList::pop()
+{
+  //return an empty string if the list is empty
+  if (head == nullptr)
+  {
+    return "";
+  }
+  //remove the first node in the list and make the second node the new head
+  Node* temp = head;
+  head = head->next;
+  //decrement size
+  size--;
+
+
+
+  //declare valuesOut string that contains all values formatted for a node
+  std::string valuesOut = "[";
+
+  //append each value in values to valuesOut string
+  for (auto s = temp->values.begin(); s != temp->values.end(); s++) {
+    valuesOut += *s;
+
+    //insert commas between values in valuesOut string
+    if (s != temp->values.end() - 1) {
+      valuesOut += ", ";
+    }
+  }
+  //append closing square bracket to valuesOut
+  valuesOut += "]";
+
+  //put word value and valuesOut into single string and return
+  std::stringstream ss;
+  ss << "(" << temp->word << ", " << valuesOut << ")";
   return ss.str();
 }

@@ -81,7 +81,7 @@ std::string Map::format(std::string word) // Format and error check a single wor
 
   // Filter out given strings
   word = filter(word, "\'s", false);  // 's
-  word = filter(word, "\'", true);    // starting with '
+  word = filter(word, "\'", false);   // '
   word = filter(word, "\"", false);   // "
   word = filter(word, "/", false);    // /
   word = filter(word, "\\", false);   // 
@@ -110,6 +110,7 @@ std::string Map::format(std::string word) // Format and error check a single wor
   word = filter(word, "=", false);    // =
   word = filter(word, ":", false);    // :
   word = filter(word, ";", false);    // :
+  word = filter(word, "\t", false);   // \t
 
   return word;
 }

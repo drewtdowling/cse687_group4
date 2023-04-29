@@ -14,7 +14,7 @@ public:
 
 	// I/O operations
 	std::string executePowerShellCommand(std::string);
-	std::string readInputFileToString(std::string);
+	std::string readInputFileToString();
 	std::string readFromIntermediateDirectoryToString(std::string);
 	int writeToIntermediateDirectoryWithString(std::string, std::string);
 	int writeToOutputDirectoryWithString(std::string);

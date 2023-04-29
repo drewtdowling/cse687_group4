@@ -35,9 +35,16 @@ ver 1.4 23 April 2023
 
 ver 1.5 25 April 2023
 -Added function to execute PowerShell
+
+ver 1.6 28 April 2023
+-Upgraded to C++17
+-Switched to filesystem::directory_iterator
+-Removed PowerShell command
 */
 
 #include "FileManagement.h"
+#include <filesystem>
+#include <string>
 
 FileManagement::FileManagement()
 {
@@ -51,47 +58,30 @@ FileManagement::~FileManagement()
 
 }
 
-std::string FileManagement::executePowerShellCommand(std::string command)
+std::string FileManagement::readInputFileToString()
 {
-	std::string result = "";
-	std::string fullCommand = "powershell.exe -ExecutionPolicy Bypass -Command \"" + command + "\"";
-	char buffer[128];
-	FILE* pipe = _popen(fullCommand.c_str(), "r");
-	if (!pipe)
-	{
-		std::cerr << "Failed to execute PowerShell command.";
-		return "";
-	}
-	try
-	{
-		while (fgets(buffer, sizeof(buffer), pipe) != NULL)
-		{
-			result += buffer;
+	std::filesystem::path path(this->_inputDirectory);
+	std::string output = "";
+
+	for (const auto& entry : std::filesystem::directory_iterator(path)) {
+		std::ifstream infile(entry.path().string());
+		if (infile) {
+			std::string content((std::istreambuf_iterator<char>(infile)), (std::istreambuf_iterator<char>()));
+			output.append(content);
+			output.append("\n");
+		}
+		else {
+			// Error handling here
+			std::cerr << "Unable to open file from the input directory" << std::endl;
 		}
 	}
-	catch (...)
-	{
-		std::cerr << "Failed to execute PowerShell command.";
+	if (output == "") {
+		// Error handling here
+		std::cerr << "No acceptable files in the input directory" << std::endl;
 		return "";
 	}
-	_pclose(pipe);
-	return result;
-}
 
-std::string FileManagement::readInputFileToString(std::string fileName)
-{
-	std::string inputName = this->_inputDirectory + fileName;
-	std::ifstream infile(inputName);
-
-	if (infile) {
-		std::string content((std::istreambuf_iterator<char>(infile)), (std::istreambuf_iterator<char>()));
-		return content;
-	}
-	else {
-		// Error handling here
-		std::cerr << "Unable to open file from the input directory" << std::endl;
-		return ""; // Just return an empty string so no null exceptions
-	}
+	return output;
 }
 
 std::string FileManagement::readFromIntermediateDirectoryToString(std::string fileName)

@@ -27,6 +27,9 @@ Maintenance History:
 --------------------
 ver 1.0 : 14 April 2023
 -initial release
+
+ver 1.1: 27 April 2023
+-added the pop() method
 */
 
 #include <iostream>
@@ -47,6 +50,8 @@ public:
 	int getSize() const;
 	//get the value of the node at a specific index in the list
 	std::string getNode(int) const;
+	//remove the first node from the list and return the value.
+	std::string pop();
 
 private:
 	Node* head; //pointer to the first node in the list
